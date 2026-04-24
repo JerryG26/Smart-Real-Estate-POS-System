@@ -7,6 +7,7 @@ Linkedlist::~Linkedlist(){
         head = head->next;
         delete temp;
     }
+    head = tail = nullptr;
 }
 void Linkedlist::addTransactions(Property data){
     Node *newData = new Node(data);
