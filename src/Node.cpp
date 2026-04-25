@@ -1,3 +1,3 @@
 #include "Node.hpp"
 
-Node::Node(Property data, Node *next = nullptr):data{data}{}
+Node::Node(Property dataNode,Node *prev, Node *next):data{dataNode}{}

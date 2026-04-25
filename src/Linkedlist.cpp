@@ -1,5 +1,5 @@
 #include "Linkedlist.hpp"
-
+#include <iostream>
 Linkedlist::Linkedlist():head{nullptr},tail{nullptr}{}
 Linkedlist::~Linkedlist(){
     while(head){
@@ -9,18 +9,27 @@ Linkedlist::~Linkedlist(){
     }
     head = tail = nullptr;
 }
-void Linkedlist::addTransactions(Property data){
+bool Linkedlist::addTransactions(Property data){
     Node *newData = new Node(data);
 
     if(!head){
         head = tail = newData;
     }else{
+        newData->prev = tail;
         tail->next = newData;
         tail = newData;
     }
+    return true;
 }
-Property *Linkedlist::removeTransaction(int id){
+bool Linkedlist::removeTransaction(int id){
+    if(!head){
+        std::cout<<"Transaction is empty."<<std::endl;
+        return false;
+    }
 
+    int i{1};
+    return false;
+    
 }
 void Linkedlist::displayTransactions(){
     Node *curr{head};
@@ -41,20 +50,12 @@ double Linkedlist::calculateSales(){
 }
 Property *Linkedlist::searchTransactions(int id){
     Node *temp{head};
-    bool check{false};
-    Property *property{nullptr};
     while(temp){
         if(id == temp->data.getId()){
-            check = true;
-            property = &temp->data;
-            break;
+            return &temp->data;
         }
         temp = temp->next;
     }
 
-    if(check){
-        return property;
-    }else{
-        return nullptr;
-    }
+    return nullptr;
 }

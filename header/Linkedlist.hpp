@@ -10,8 +10,8 @@ class Linkedlist{
     public:
     Linkedlist();
     ~Linkedlist();
-    void addTransactions(Property data);
-    Property *removeTransaction(int id);
+    bool addTransactions(Property data);
+    bool removeTransaction(int id);
     void displayTransactions();
     double calculateSales();
     Property *searchTransactions(int id);
