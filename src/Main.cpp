@@ -10,6 +10,7 @@ int main(){
     list.addTransactions(Property(4,"type4","sector4",14.5));
     list.addTransactions(Property(5,"type5","sector5",15.5));
     list.addTransactions(Property(6,"type6","sector6",16.5));
+    list.removeTransaction(2);
     list.displayTransactions();
     return 0;
 }

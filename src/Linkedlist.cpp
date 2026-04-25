@@ -27,7 +27,26 @@ bool Linkedlist::removeTransaction(int id){
         return false;
     }
 
-    int i{1};
+    Node *curr{head};
+    Node *prev{nullptr};
+    while(curr){
+        if(curr->data.getId() == id){
+            if(curr == head){
+                Node *temp{head};
+                head = head->next;
+                delete temp;
+            }else{
+                if(curr == tail){
+                    tail = prev;
+                }
+                prev->next = curr->next;
+                delete curr;
+            }
+            return true;
+        }
+        prev = curr;
+        curr = curr->next;
+    }
     return false;
     
 }
