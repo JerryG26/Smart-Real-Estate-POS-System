@@ -1,13 +1,14 @@
 #include "Property.hpp"
 #include <iostream>
 //Constructor
+Property::Property():id{0},propertyType{""},sector{""},price{0.00}{}
 Property::Property(int id, std::string propertyType, std::string sector, double price): id{id}, propertyType{propertyType},sector{sector},price{price}{}
 
 //Methodds
 int Property::getId(){return id;}
 std::string Property::getPropertyType(){return propertyType;}
 std::string Property::getSector(){return sector;}
-double Property::getPrice(){return price;}
+double Property::getPrice()const{return price;}
 void Property::setId(int id){this->id = id;}
 void Property::setPropertyType(std::string type){this->propertyType = type;}
 void Property::setSector(std::string sector){this->sector = sector;}

@@ -10,10 +10,12 @@ class Linkedlist{
     public:
     Linkedlist();
     ~Linkedlist();
-    bool addTransactions(Property data);
+    bool addTransactions(const Property &data);
     bool removeTransaction(int id);
-    void displayTransactions();
-    double calculateSales();
-    Property *searchTransactions(int id);
+    bool removeFront();
+    const Property *frontOfQueue()const;
+    bool isEmpty()const;
+    void display()const;
+    Property *searchID(int id);
 };
 #endif

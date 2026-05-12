@@ -9,7 +9,7 @@ Linkedlist::~Linkedlist(){
     }
     head = tail = nullptr;
 }
-bool Linkedlist::addTransactions(Property data){
+bool Linkedlist::addTransactions(const Property &data){
     Node *newData = new Node(data);
 
     if(!head){
@@ -50,31 +50,47 @@ bool Linkedlist::removeTransaction(int id){
     return false;
     
 }
-void Linkedlist::displayTransactions(){
+
+bool Linkedlist::removeFront(){
+    if(isEmpty()){
+        std::cout<<"The list is empty";
+       return false; 
+    } 
+
+    Node *temp{head};
+    head = head->next;
+    delete temp;
+    return true;
+
+}
+bool Linkedlist::isEmpty()const{
+    return (!head && !tail);
+}
+
+const Property *Linkedlist::frontOfQueue()const{
+    if(!head) return nullptr;
+    return &head->data;
+}
+
+Property *Linkedlist::searchID(int id){
+    Node *curr{head};
+    while(curr){
+        if(curr->data.getId() == id){
+            return &curr->data;
+        }
+        curr = curr->next;
+    }
+    return nullptr;
+}
+
+void Linkedlist::display()const{
+    if(isEmpty()){
+        std::cout<<"The list is empty."<<std::endl;
+        return;
+    }
     Node *curr{head};
     while(curr){
         curr->data.displayInfo();
         curr = curr->next;
     }
-    
-}
-double Linkedlist::calculateSales(){
-    double total{0};
-    Node *curr{head};
-    while(curr){
-        total = total+curr->data.getPrice();
-        curr = curr->next;
-    }
-    return total;
-}
-Property *Linkedlist::searchTransactions(int id){
-    Node *temp{head};
-    while(temp){
-        if(id == temp->data.getId()){
-            return &temp->data;
-        }
-        temp = temp->next;
-    }
-
-    return nullptr;
 }
