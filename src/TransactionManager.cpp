@@ -6,7 +6,6 @@ TransactionManager::TransactionManager():totalRevenue{0.0}{}
 void TransactionManager::processSale(const Property& p){
     if (salesHistory.addTransactions(p)) { 
         totalRevenue += p.getPrice();      
-        std::cout << "Transaction processed successfully.";
     }
 }
 void TransactionManager::displayTransactions()const{

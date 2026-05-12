@@ -16,6 +16,7 @@ bool InventoryArray::add(const Property &p){
         resize();
     }
     array[totalStock++] = p;
+    return true;
 }
 bool InventoryArray::remove(int id){
     int index{0};
