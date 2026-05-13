@@ -65,8 +65,3 @@ class InventoryManager {
         }
 }; 
 
-int main() {
-    InventoryManager manager;  
-    manager.run();
-    return 0;
-}
