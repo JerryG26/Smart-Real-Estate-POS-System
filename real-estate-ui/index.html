@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart Real Estate POS System</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #0f172a;
+      color: white;
+      overflow: hidden;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .page {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    /* LOGIN PAGE */
+
+    #loginPage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .background-circle {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.35;
+    }
+
+    .circle1 {
+      width: 320px;
+      height: 320px;
+      background: #3b82f6;
+      top: -100px;
+      left: -100px;
+    }
+
+    .circle2 {
+      width: 380px;
+      height: 380px;
+      background: #8b5cf6;
+      bottom: -140px;
+      right: -120px;
+    }
+
+    .login-container {
+      width: 950px;
+      height: 580px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(20px);
+      border-radius: 30px;
+      overflow: hidden;
+      display: flex;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+      z-index: 1;
+    }
+
+    .left-panel {
+      flex: 1;
+      padding: 60px;
+      background: linear-gradient(to bottom right, rgba(59,130,246,0.25), rgba(139,92,246,0.2));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .left-panel h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      line-height: 1.1;
+    }
+
+    .left-panel p {
+      color: #cbd5e1;
+      line-height: 1.8;
+      max-width: 420px;
+    }
+
+    .feature-box {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .feature-item {
+      background: rgba(255,255,255,0.08);
+      padding: 15px;
+      border-radius: 14px;
+      color: #e2e8f0;
+    }
+
+    .right-panel {
+      width: 420px;
+      background: rgba(15,23,42,0.88);
+      padding: 60px 45px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right-panel h2 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .right-panel p {
+      color: #94a3b8;
+      margin-bottom: 35px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 10px;
+      color: #e2e8f0;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      outline: none;
+      font-size: 15px;
+    }
+
+    .input-group select option {
+      background: #1e293b;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 10px;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(59,130,246,0.3);
+    }
+
+    /* DASHBOARD COMMON */
+
+    .dashboard {
+      display: flex;
+      background: #0f172a;
+    }
+
+    .sidebar {
+      width: 260px;
+      background: #111827;
+      padding: 30px 20px;
+      border-right: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 50px;
+      color: #60a5fa;
+    }
+
+    .nav-item {
+      padding: 16px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+      color: #cbd5e1;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 35px;
+      overflow-y: auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 35px;
+    }
+
+    .topbar h1 {
+      font-size: 32px;
+    }
+
+    .profile {
+      background: rgba(255,255,255,0.08);
+      padding: 12px 18px;
+      border-radius: 14px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 28px;
+      border-radius: 24px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card h3 {
+      color: #94a3b8;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .card .value {
+      font-size: 34px;
+      font-weight: 700;
+    }
+
+    .table-container {
+      background: #1e293b;
+      border-radius: 24px;
+      padding: 25px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    th {
+      color: #94a3b8;
+    }
+
+    .status {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      display: inline-block;
+    }
+
+    .sold {
+      background: rgba(34,197,94,0.15);
+      color: #22c55e;
+    }
+
+    .pending {
+      background: rgba(251,191,36,0.15);
+      color: #fbbf24;
+    }
+
+    .logout-btn {
+      margin-top: auto;
+      padding: 15px;
+      border: none;
+      border-radius: 14px;
+      background: #ef4444;
+      color: white;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    @media(max-width: 900px) {
+      .sidebar {
+        display: none;
+      }
+
+      .login-container {
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+      }
+
+      .right-panel {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN PAGE -->
+
+  <div id="loginPage" class="page">
+
+    <div class="background-circle circle1"></div>
+    <div class="background-circle circle2"></div>
+
+    <div class="login-container">
+
+      <div class="left-panel">
+        <h1>Smart Real Estate POS</h1>
+
+        <p>
+          Manage properties, transactions, analytics, and inventory through one powerful real-estate management system.
+        </p>
+
+        <div class="feature-box">
+          <div class="feature-item">🏠 Property Management</div>
+          <div class="feature-item">📊 Analytics Dashboard</div>
+          <div class="feature-item">💳 Secure Transactions</div>
+        </div>
+      </div>
+
+      <div class="right-panel">
+
+        <h2>Welcome Back</h2>
+        <p>Login to continue</p>
+
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" placeholder="Enter your email">
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" placeholder="Enter your password">
+        </div>
+
+        <div class="input-group">
+          <label>Login As</label>
+
+          <select id="roleSelect">
+            <option value="admin">Admin</option>
+            <option value="user">User</option>
+          </select>
+        </div>
+
+        <button class="login-btn" onclick="login()">
+          Sign In
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+
+  <div id="adminDashboard" class="page dashboard hidden">
+
+    <div class="sidebar">
+      <div class="logo">Admin Panel</div>
+
+      <div class="nav-item active">Dashboard</div>
+      <div class="nav-item">Properties</div>
+      <div class="nav-item">Transactions</div>
+      <div class="nav-item">Inventory</div>
+      <div class="nav-item">Reports</div>
+      <div class="nav-item">Users</div>
+
+      <button class="logout-btn" onclick="logout()">
+        Logout
+      </button>
+    </div>
+
+    <div class="main-content">
+
+      <div class="topbar">
+        <h1>Admin Dashboard</h1>
+        <div class="profile">Administrator</div>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <h3>Total Properties</h3>
+          <div class="value">128</div>
+        </div>
+
+        <div class="card">
+          <h3>Total Sales</h3>
+          <div class="value">₱5.2M</div>
+        </div>
+
+        <div class="card">
+          <h3>Pending Transactions</h3>
+          <div class="value">14</div>
+        </div>
+
+        <div class="card">
+          <h3>Registered Users</h3>
+          <div class="value">42</div>
+        </div>
+
+      </div>
+
+      <div class="table-container">
+        <h2>Recent Transactions</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Property</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Juan Dela Cruz</td>
+              <td>Condo Unit A</td>
+              <td>₱2,500,000</td>
+              <td><span class="status sold">Completed</span></td>
+            </tr>
+
+            <tr>
+              <td>Maria Santos</td>
+              <td>Townhouse B</td>
+              <td>₱1,800,000</td>
+              <td><span class="status pending">Pending</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- USER DASHBOARD -->
+
+  <div id="userDashboard" class="page dashboard hidden">
+
+    <div class="sidebar">
+      <div class="logo">User Portal</div>
+
+      <div class="nav-item active">Dashboard</div>
+      <div class="nav-item">Browse Properties</div>
+      <div class="nav-item">My Transactions</div>
+      <div class="nav-item">Saved Properties</div>
+      <div class="nav-item">Support</div>
+
+      <button class="logout-btn" onclick="logout()">
+        Logout
+      </button>
+    </div>
+
+    <div class="main-content">
+
+      <div class="topbar">
+        <h1>User Dashboard</h1>
+        <div class="profile">Welcome, User</div>
+      </div>
+
+      <div class="cards">
+
+        <div class="card">
+          <h3>Saved Properties</h3>
+          <div class="value">12</div>
+        </div>
+
+        <div class="card">
+          <h3>Active Transactions</h3>
+          <div class="value">3</div>
+        </div>
+
+        <div class="card">
+          <h3>Appointments</h3>
+          <div class="value">5</div>
+        </div>
+
+      </div>
+
+      <div class="table-container">
+        <h2>Recommended Properties</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Location</th>
+              <th>Price</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Luxury Condo</td>
+              <td>Cebu City</td>
+              <td>₱3,200,000</td>
+              <td><span class="status sold">Available</span></td>
+            </tr>
+
+            <tr>
+              <td>Modern House</td>
+              <td>Mandaue</td>
+              <td>₱5,500,000</td>
+              <td><span class="status pending">Limited</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    function login() {
+
+      const role = document.getElementById('roleSelect').value;
+
+      document.getElementById('loginPage').classList.add('hidden');
+
+      if(role === 'admin') {
+        document.getElementById('adminDashboard').classList.remove('hidden');
+      }
+      else {
+        document.getElementById('userDashboard').classList.remove('hidden');
+      }
+    }
+
+    function logout() {
+
+      document.getElementById('adminDashboard').classList.add('hidden');
+      document.getElementById('userDashboard').classList.add('hidden');
+
+      document.getElementById('loginPage').classList.remove('hidden');
+    }
+
+  </script>
+
+</body>
+</html>
