@@ -1,19 +1,35 @@
 #include <iostream>
+#include <string>
 #include "../header/TransactionManager.hpp"
 #include "../header/Property.hpp"
+#include "../header/TerminalMenuController.hpp"
 #include "InventoryManager.cpp"
-// #include "PropertyTree.hpp"
-// #include "TerminalMenuController.hpp"
-int main(){
-    std::cout<<"Testing Linkedlist."<<std::endl;
-    // TransactionManager manager;
-    InventoryManager manager;  
-    manager.run();
+#include "TerminalMenuController.cpp"
 
+int main() {
+    std::string username, password;
 
-    // std::cout << "\n--- Launching Real Estate POS Menu ---" << std::endl;
-    // TerminalMenuController menu;
-    // menu.showMainMenu();
+    std::cout << "=== Smart Real Estate POS Login ===" << std::endl;
+    std::cout << "Username: ";
+    std::cin >> username;
+    std::cout << "Password: ";
+    std::cin >> password;
+
+    if (username == "admin" && password == "admin123") {
+        std::cout << "\n✅ Login Successful! Accessing Admin Dashboard...\n" << std::endl;
+        InventoryManager manager;  
+        manager.run();
+    } 
+    else if (username == "user" && password == "user123") {
+        std::cout << "\n✅ Login Successful! Accessing User Dashboard...\n" << std::endl;
+        TerminalMenuController menu;
+        menu.showMainMenu();
+    } 
+    else {
+        std::cout << "\n❌ Invalid credentials! Access Denied." << std::endl;
+    }
 
     return 0;
 }
+
+

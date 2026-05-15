@@ -331,7 +331,18 @@
         width: 100%;
       }
     }
+    .error-msg {
+      color: #f87171;
+      font-size: 14px;
+      margin-bottom: 15px;
+      text-align: center;
+      background: rgba(239, 68, 68, 0.1);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
   </style>
+
 </head>
 <body>
 
@@ -363,6 +374,9 @@
         <h2>Welcome Back</h2>
         <p>Login to continue</p>
 
+        <div id="errorMsg" class="error-msg hidden">Invalid credentials!</div>
+
+
         <div class="input-group">
           <label>Email</label>
           <input type="email" placeholder="Enter your email">
@@ -373,14 +387,8 @@
           <input type="password" placeholder="Enter your password">
         </div>
 
-        <div class="input-group">
-          <label>Login As</label>
+        <!-- Role selection removed: role is now detected automatically -->
 
-          <select id="roleSelect">
-            <option value="admin">Admin</option>
-            <option value="user">User</option>
-          </select>
-        </div>
 
         <button class="login-btn" onclick="login()">
           Sign In
@@ -559,18 +567,26 @@
   <script>
 
     function login() {
+      const email = document.querySelector('input[type="email"]').value;
+      const password = document.querySelector('input[type="password"]').value;
+      const errorMsg = document.getElementById('errorMsg');
 
-      const role = document.getElementById('roleSelect').value;
-
-      document.getElementById('loginPage').classList.add('hidden');
-
-      if(role === 'admin') {
+      if (email === 'admin' && password === 'admin123') {
+        errorMsg.classList.add('hidden');
+        document.getElementById('loginPage').classList.add('hidden');
         document.getElementById('adminDashboard').classList.remove('hidden');
-      }
-      else {
+      } 
+      else if (email === 'user' && password === 'user123') {
+        errorMsg.classList.add('hidden');
+        document.getElementById('loginPage').classList.add('hidden');
         document.getElementById('userDashboard').classList.remove('hidden');
+      } 
+      else {
+        errorMsg.classList.remove('hidden');
       }
     }
+
+
 
     function logout() {
 
