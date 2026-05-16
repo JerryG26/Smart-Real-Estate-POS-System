@@ -25,6 +25,7 @@ int main() {
         TerminalMenuController menu;
         menu.showMainMenu();
     } 
+    // if invalid credentials are entered, the user will be notified and the program will terminate.
     else {
         std::cout << "\n❌ Invalid credentials! Access Denied." << std::endl;
     }
@@ -32,4 +33,4 @@ int main() {
     return 0;
 }
 
-
+
