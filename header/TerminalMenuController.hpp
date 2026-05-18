@@ -1,9 +1,19 @@
-#ifndef _TERMINAL_MENU_CONTROLLER_H_
-#define _TERMINAL_MENU_CONTROLLER_H_
+#pragma once
+#include "PropertyArray.hpp"
+#include "TransactionManager.hpp"
+#include "Stack.hpp"
 
 class TerminalMenuController {
+private:
+    PropertyArray inventory;
+    TransactionManager transactionManager;
+    Stack undoStack;
+
+    void buyProperty();
+    void viewHistory();
+    void undoLastTransaction();
+
 public:
+    TerminalMenuController();
     void showMainMenu();
 };
-
-#endif

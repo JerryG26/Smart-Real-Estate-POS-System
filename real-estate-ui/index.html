@@ -341,6 +341,131 @@
       border-radius: 8px;
       border: 1px solid rgba(239, 68, 68, 0.2);
     }
+
+    /* LIGHT MODE STYLES */
+    body, .login-container, .left-panel, .right-panel, .sidebar, .card, .table-container, .profile, .nav-item, input, button, td, th, .feature-item, #loginPage {
+      transition: background 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    body.light-mode {
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    body.light-mode #loginPage {
+      background: linear-gradient(135deg, #f1f5f9, #e2e8f0, #cbd5e1);
+    }
+
+    body.light-mode .login-container {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    body.light-mode .left-panel {
+      background: linear-gradient(to bottom right, rgba(59,130,246,0.15), rgba(139,92,246,0.1));
+    }
+
+    body.light-mode .left-panel p {
+      color: #475569;
+    }
+
+    body.light-mode .feature-item {
+      background: rgba(255, 255, 255, 0.5);
+      color: #334155;
+    }
+
+    body.light-mode .right-panel {
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    body.light-mode .right-panel p,
+    body.light-mode .input-group label {
+      color: #475569;
+    }
+
+    body.light-mode .input-group input {
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    body.light-mode .dashboard {
+      background: #f8fafc;
+    }
+
+    body.light-mode .sidebar {
+      background: #ffffff;
+      border-right: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    body.light-mode .nav-item {
+      color: #475569;
+    }
+
+    body.light-mode .nav-item:hover,
+    body.light-mode .nav-item.active {
+      color: white;
+    }
+
+    body.light-mode .profile {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    body.light-mode .card,
+    body.light-mode .table-container {
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    body.light-mode .card h3,
+    body.light-mode th {
+      color: #64748b;
+    }
+
+    body.light-mode th,
+    body.light-mode td {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* THEME TOGGLE BUTTON */
+    #loginPage .theme-toggle {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+    }
+
+    .theme-toggle {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(15deg);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    body.light-mode .theme-toggle {
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: #0f172a;
+    }
+    
+    body.light-mode .theme-toggle:hover {
+      background: rgba(0, 0, 0, 0.1);
+    }
   </style>
 
 </head>
@@ -349,6 +474,7 @@
   <!-- LOGIN PAGE -->
 
   <div id="loginPage" class="page">
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">☀️</button>
 
     <div class="background-circle circle1"></div>
     <div class="background-circle circle2"></div>
@@ -376,23 +502,23 @@
 
         <div id="errorMsg" class="error-msg hidden">Invalid credentials!</div>
 
+        <form onsubmit="event.preventDefault(); login();">
+          <div class="input-group">
+            <label>Username</label>
+            <input type="text" id="loginUsername" placeholder="Enter your username" required>
+          </div>
 
-        <div class="input-group">
-          <label>Email</label>
-          <input type="email" placeholder="Enter your email">
-        </div>
+          <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password" required>
+          </div>
 
-        <div class="input-group">
-          <label>Password</label>
-          <input type="password" placeholder="Enter your password">
-        </div>
+          <!-- Role selection removed: role is now detected automatically -->
 
-        <!-- Role selection removed: role is now detected automatically -->
-
-
-        <button class="login-btn" onclick="login()">
-          Sign In
-        </button>
+          <button type="submit" class="login-btn">
+            Sign In
+          </button>
+        </form>
 
       </div>
 
@@ -423,7 +549,10 @@
 
       <div class="topbar">
         <h1>Admin Dashboard</h1>
-        <div class="profile">Administrator</div>
+        <div style="display: flex; gap: 15px; align-items: center;">
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">☀️</button>
+          <div class="profile">Administrator</div>
+        </div>
       </div>
 
       <div class="cards">
@@ -507,7 +636,10 @@
 
       <div class="topbar">
         <h1>User Dashboard</h1>
-        <div class="profile">Welcome, User</div>
+        <div style="display: flex; gap: 15px; align-items: center;">
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Light/Dark Mode">☀️</button>
+          <div class="profile">Welcome, User</div>
+        </div>
       </div>
 
       <div class="cards">
@@ -567,16 +699,16 @@
   <script>
 
     function login() {
-      const email = document.querySelector('input[type="email"]').value;
-      const password = document.querySelector('input[type="password"]').value;
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
       const errorMsg = document.getElementById('errorMsg');
 
-      if (email === 'admin' && password === 'admin123') {
+      if (username === 'admin' && password === 'admin123') {
         errorMsg.classList.add('hidden');
         document.getElementById('loginPage').classList.add('hidden');
         document.getElementById('adminDashboard').classList.remove('hidden');
       } 
-      else if (email === 'user' && password === 'user123') {
+      else if (username === 'user' && password === 'user123') {
         errorMsg.classList.add('hidden');
         document.getElementById('loginPage').classList.add('hidden');
         document.getElementById('userDashboard').classList.remove('hidden');
@@ -596,6 +728,14 @@
       document.getElementById('loginPage').classList.remove('hidden');
     }
 
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      const btns = document.querySelectorAll('.theme-toggle');
+      btns.forEach(btn => {
+        btn.innerHTML = isLight ? '🌙' : '☀️';
+      });
+    }
   </script>
 
 </body>
